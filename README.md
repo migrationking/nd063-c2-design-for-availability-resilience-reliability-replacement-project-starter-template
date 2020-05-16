@@ -92,8 +92,20 @@ In the standby region:
 
 1. Create an EC2 keypair in the region
 2. Launch an Amazon Linux EC2 instance in the standby region. Configure the instance to use the VPC's public subnet and security group ("UDARR-Application").
-3. SSH to the instance and connect to the read replica database.
+3. SSH to the instance and connect to the read replica database. (*Highly suggest learning on your own but this is what I learned when I got stuck and it is a general guide only. Don't cheat.)
+
+   3a. Example ssh command for Amazon Linux 2: ssh -i "kp-udacity-p1.pem" ec2-user@ec2-34-224-80-144.compute-1.amazonaws.com 
+        Note: Make sure you in the same directory of the key file or you type the path.
+        
+   3b. MySql is not installed by default. Enable MySql by running "sudo yum install mysql -y"
+   
+   3c. mysql -h udacity.ctx2m04ir1m9.us-east-1.rds.amazonaws.com -u admin -p (type the password that you created)
+       The udacity.ctx... dns name is found under RDS connectivity and security. What a bugger this was if you don't know.
+   
 4. Verify if you are not able to insert data into the database but are able to read from the database.
+   4a. Super Helpful YouTube video: https://www.youtube.com/watch?v=XJ7dlwHuVUk
+   4b. Read the Docs! https://dev.mysql.com/doc/refman/8.0/en/creating-tables.html
+   
 5. You have now demonstrated that you can only read from the read replica database.
 
 **SAVE** log of connecting to the database, writing to and reading from the table in a text file called "log_rr_before_promotion.txt"
